@@ -2564,10 +2564,7 @@ public final class ActivityStackSupervisor implements DisplayListener {
             throw new IllegalStateException("Calling must be system uid");
         }
         mLaunchingActivity.acquire();
-        if (!mHandler.hasMessages(LAUNCH_TIMEOUT_MSG)) {
-            // To be safe, don't allow the wake lock to be held for too long.
-            mHandler.sendEmptyMessageDelayed(LAUNCH_TIMEOUT_MSG, LAUNCH_TIMEOUT);
-        }
+        mLaunchingActivity.release();
     }
 
     /**
